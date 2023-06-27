@@ -2,7 +2,7 @@ from pygame.locals import *
 import pygame
 
 def main():
-    width, height = 1000,1000
+    width, height = 1000,700
     screen = pygame.display.set_mode((width,height),DOUBLEBUF)
     xaxis = width/1.5+140
     yaxis = height/2

@@ -15,7 +15,7 @@ def update():
 
 w = Tk()
 w.title("Kymo's Designs - Clock")
-w.geometry("400x195")
+w.geometry("400x220")
 
 lblTime = Label(w, font = ("Z003", 50), fg = "#00ff00", bg = "#000000", width = 400)
 lblTime.pack()

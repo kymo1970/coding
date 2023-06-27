@@ -1,6 +1,6 @@
 from turtle import right, left, forward, speed, exitonclick, hideturtle
  
-def dragon(level=4, size=200, direction=45):
+def dragon(level=4, size=200000, direction=45):
     if level:
         right(direction)
         dragon(level-1, size/1.41421356237, 45)
@@ -12,5 +12,5 @@ def dragon(level=4, size=200, direction=45):
  
 speed(0)
 hideturtle()
-dragon(6)
+dragon(30)
 exitonclick() # click to exit

@@ -57,13 +57,13 @@ def main():
         pygame.draw.circle(mw, PURPLE, center, clockRadius - 10, 10)
         pygame.draw.circle(mw, PURPLE, center, 12)
 
-        numbers(str(weekday), 40, (WIDTH / 2 - 220, HEIGHT / 2))
+        numbers(str(weekday), 40, (WIDTH / 2 - 160, HEIGHT / 2))
 
         #numbers(str(calendar[1]), 40, (WIDTH / 2 - 140, HEIGHT / 2))
 
-        numbers(str(month), 40, (WIDTH / 2 + 140, HEIGHT / 2))
+        numbers(str(month), 40, (WIDTH / 2 + 120, HEIGHT / 2))
 
-        numbers(str(day), 40, (WIDTH / 2 + 220, HEIGHT / 2))
+        numbers(str(day), 40, (WIDTH / 2 + 160, HEIGHT / 2))
 
         numbers(str(year), 40, (WIDTH / 2, HEIGHT / 2 + 160))
 
@@ -80,18 +80,18 @@ def main():
 
 
         # Hour Hand
-        r = 250
+        r = 200
         theta = (hour + (minute / 60) + (second / 3600) + microSecond / 3600000000) * (360 / 12)
         pygame.draw.line(mw, BLUE, center, polarToCartesian(r, theta), 15)
 
 
         # Minute Hand
-        r = 300
+        r = 240
         theta = (minute + second / 60 + microSecond / 60000000) * (360 / 60)
         pygame.draw.line(mw, BLUE, center, polarToCartesian(r, theta), 10)
 
         # Second Hand
-        r = 340
+        r = 280
         theta = ((second + microSecond / 1000000) * (360 / 60))
         pygame.draw.line(mw, RED, center, polarToCartesian(r, theta), 4)
 
