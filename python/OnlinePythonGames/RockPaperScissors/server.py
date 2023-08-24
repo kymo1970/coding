@@ -40,7 +40,7 @@ while True:
     conn, addr = sock.accept()
     print("Connected to: ", addr)
     
-    start_new_thread(threadedClient, conn)
+    start_new_thread(threadedClient, (conn,))
     
     
     
