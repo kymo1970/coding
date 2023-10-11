@@ -16,8 +16,9 @@ sock.listen(2)
 print("Waiting for connection, Server has been started.")        
 
 
+pos = [(0, 0), (400, 400)]
 def threadedClient(conn):
-    
+    conn.send(str.encode("Connected"))
     reply = ""
     while True:
         try:
@@ -34,13 +35,17 @@ def threadedClient(conn):
             conn.sendall(str.encode(reply))
         except:
             break        
+    
+    print("Lost Connection!")
+    conn.close()        
 
-
+currentPlayer = 0
 while True:
     conn, addr = sock.accept()
     print("Connected to: ", addr)
     
     start_new_thread(threadedClient, (conn,))
     
+    currentPlayer += 1
     
     
