@@ -29,3 +29,4 @@ class Network:
 
 
 
+n = Network()
