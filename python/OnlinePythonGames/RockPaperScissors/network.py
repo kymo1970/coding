@@ -8,6 +8,7 @@ class Network:
         self.port = 5555
         self.addr = (self.server, self.port)
         self.pos = self.connect()
+        print(self.pos)
         
     def getPos(self):
         return self.pos    
