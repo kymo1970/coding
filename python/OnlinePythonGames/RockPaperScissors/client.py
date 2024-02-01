@@ -1,11 +1,98 @@
+# import pygame
+# from network import Network
+
+# WIDTH = 500
+# HEIGHT = 500
+# mw = pygame.display.set_mode((WIDTH, HEIGHT))
+# pygame.display.set_caption("Client")
+# mw.fill("#ffffff") Leave Commented Out
+
+# clientNumber = 0
+
+
+# class Player():
+#     def __init__(self, x, y, width, height, color):
+#         self.x = x
+#         self.y = y
+#         self.width = width
+#         self.height = height
+#         self.color = color
+#         self.rect = (x, y, width, height)
+#         self.vel = 3
+        
+#     def draw(self, mw):
+#         pygame.draw.rect(mw, self.color, self.rect)
+            
+            
+#     def move(self):
+#         key = pygame.key.get_pressed()
+            
+#         if key[pygame.K_LEFT]:
+#             self.x -= self.vel
+            
+#         if key[pygame.K_RIGHT]:
+#             self.x += self.vel
+            
+#         if key[pygame.K_UP]:
+#             self.y -= self.vel
+            
+#         if key[pygame.K_DOWN]:
+#             self.y += self.vel
+            
+#         self.update()    
+            
+#     def update(self):        
+#         self.rect = (self.x, self.y, self.width, self.height)    
+
+
+# def readPos(str):
+#     str = str.split(",")
+#     return int(str[0]), int(str[1])
+
+
+# def makePos(tup):
+#     return str(tup[0]) + "," + str(tup[1])
+
+
+# def redrawWindow(mw, player, player2):    
+#     mw.fill("#ffffff")
+#     player.draw(mw)
+#     player2.draw(mw)
+#     pygame.display.update()
+    
+    
+# def main():
+#     run = True
+#     nw = Network()
+#     startPos = readPos(nw.getPos())
+#     player = Player(startPos[0], startPos[1], 100, 100, "#ff0000")
+#     player2 = Player(0, 0, 100, 100, "#00ff00")
+#     clock = pygame.time.Clock()
+    
+#     while run:
+#         clock.tick(60)
+#         player2Pos = readPos(nw.send(makePos((player.x, player.y))))
+#         player2.x = player2Pos[0]
+#         player2.y = player2Pos[1]
+#         player2.update()
+#         for event in pygame.event.get():
+#             if event.type == pygame.QUIT:
+#                 run = False
+#                 pygame.quit()
+
+#         player.move()       
+#         redrawWindow(mw, player, player2)
+
+# main()
+
+
 import pygame
 from network import Network
 
-WIDTH = 500
-HEIGHT = 500
-mw = pygame.display.set_mode((WIDTH, HEIGHT))
+width = 500
+height = 500
+win = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Client")
-mw.fill("#ffffff")
 
 clientNumber = 0
 
@@ -17,72 +104,70 @@ class Player():
         self.width = width
         self.height = height
         self.color = color
-        self.rect = (x, y, width, height)
+        self.rect = (x,y,width,height)
         self.vel = 3
-        
-    def draw(self, mw):
-        pygame.draw.rect(mw, self.color, self.rect)
-            
-            
+
+    def draw(self, win):
+        pygame.draw.rect(win, self.color, self.rect)
+
     def move(self):
-        key = pygame.key.get_pressed()
-            
-        if key[pygame.K_LEFT]:
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_LEFT]:
             self.x -= self.vel
-            
-        if key[pygame.K_RIGHT]:
+
+        if keys[pygame.K_RIGHT]:
             self.x += self.vel
-            
-        if key[pygame.K_UP]:
+
+        if keys[pygame.K_UP]:
             self.y -= self.vel
-            
-        if key[pygame.K_DOWN]:
+
+        if keys[pygame.K_DOWN]:
             self.y += self.vel
-            
-        self.update()    
-            
-    def update(self):        
-        self.rect = (self.x, self.y, self.width, self.height)    
+
+        self.update()
+
+    def update(self):
+        self.rect = (self.x, self.y, self.width, self.height)
 
 
-def readPos(str):
+def read_pos(str):
     str = str.split(",")
-    print(str)
     return int(str[0]), int(str[1])
 
 
-def makePos(tup):
+def make_pos(tup):
     return str(tup[0]) + "," + str(tup[1])
 
 
-def redrawWindow(mw, player, player2):    
-    mw.fill("#ffffff")
-    player.draw(mw)
-    player2.draw(mw)
+def redrawWindow(win, player, player2):
+    win.fill((255,255,255))
+    player.draw(win)
+    player2.draw(win)
     pygame.display.update()
-    
-    
+
+
 def main():
     run = True
-    nw = Network()
-    startPos = readPos(nw.getPos())
-    player = Player(startPos[0], startPos[1], 100, 100, "#ff0000")
-    player2 = Player(0, 0, 100, 100, "#00ff00")
+    n = Network()
+    startPos = read_pos(n.getPos())
+    p = Player(startPos[0],startPos[1],100,100,(0,255,0))
+    p2 = Player(0,0,100,100,(255,0,0))
     clock = pygame.time.Clock()
-    
+
     while run:
         clock.tick(60)
-        player2Pos = readPos(nw.send(makePos((player.x, player.y))))
-        player2.x = player2Pos[0]
-        player2.y = player2Pos[1]
-        player2.update()
+        p2Pos = read_pos(n.send(make_pos((p.x, p.y))))
+        p2.x = p2Pos[0]
+        p2.y = p2Pos[1]
+        p2.update()
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-                pygame.quit()    
-                
+                pygame.quit()
 
-        player.move()       
-        redrawWindow(mw, player, player2)
+        p.move()
+        redrawWindow(win, p, p2)
 
 main()
