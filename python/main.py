@@ -1,3 +1,0 @@
-# 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
-import openai
-openai.api_key = "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"
